@@ -1,0 +1,48 @@
+
+:root{--zemin:#eef0f3;--kagit:#fff;--yazi:#1b2a4a;--soluk:#5d6b85;--cizgi:#d6dbe4;--mavi:#1f4fa3;--fosfor:#ffe066;--kirmizi:#b3261e;--yesil:#1d6b46}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--zemin:#12161f;--kagit:#1a2030;--yazi:#e6eaf2;--soluk:#9aa6bd;--cizgi:#2c3448;--mavi:#8fb3ff;--fosfor:#6b5a10;--kirmizi:#ff8a80;--yesil:#7fd6a6}}
+:root[data-theme="dark"]{--zemin:#12161f;--kagit:#1a2030;--yazi:#e6eaf2;--soluk:#9aa6bd;--cizgi:#2c3448;--mavi:#8fb3ff;--fosfor:#6b5a10;--kirmizi:#ff8a80;--yesil:#7fd6a6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--zemin);color:var(--yazi);font:16px/1.6 Inter,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header{padding:44px 0 6px}
+h1{font:700 clamp(2.4rem,7vw,4rem)/1 Georgia,Georgia,serif;letter-spacing:-.02em;margin:0}
+h1 mark{background:linear-gradient(transparent 55%,var(--fosfor) 55%);color:inherit;padding:0 .08em}
+.lede{font-size:1.1rem;color:var(--soluk);max-width:58ch;margin:14px 0 0}
+.sahne{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 0}
+.kagit{background:var(--kagit);border:1px solid var(--cizgi);border-radius:6px;box-shadow:0 1px 0 var(--cizgi),0 10px 30px -18px rgba(27,42,74,.35);padding:18px 18px 16px}
+.et{font:600 .7rem/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);margin:0 0 10px;display:flex;justify-content:space-between;gap:8px}
+textarea{width:100%;min-height:340px;resize:vertical;border:0;background:none;color:var(--yazi);font:15px/1.55 Georgia,Georgia,serif;outline:none}
+.dugmeler{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+button{font:600 .95rem Inter;border-radius:99px;padding:11px 18px;cursor:pointer;border:1.5px solid var(--yazi);background:var(--kagit);color:var(--yazi);min-height:44px}
+button.ana{background:var(--yazi);color:var(--kagit)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--fosfor);outline-offset:2px}
+.kucuk{font-size:.8rem;color:var(--soluk)}
+#sonuc{min-height:340px}
+#sonuc .bos{color:var(--soluk);font:15px/1.6 Georgia,serif}
+.ozet{font:600 1.35rem/1.35 Georgia,Georgia,serif;margin:0 0 16px}
+.ozet mark{background:linear-gradient(transparent 50%,var(--fosfor) 50%);color:inherit}
+h3{font:600 .72rem/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);margin:18px 0 8px}
+.yap{list-style:none;padding:0;margin:0}
+.yap li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--cizgi)}
+.yap li::before{content:"";flex:0 0 18px;height:18px;border:2px solid var(--yazi);border-radius:4px;margin-top:3px}
+.yap .zaman{display:inline-block;margin-top:4px;font-size:.85rem;font-weight:600;background:var(--fosfor);padding:1px 6px;border-radius:3px}
+.sade p{font:16px/1.65 Georgia,Georgia,serif;margin:0 0 10px}
+.terim{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.92rem}
+.terim dt{font-weight:600}
+.terim dd{margin:0;color:var(--soluk)}
+.uyari{border-left:4px solid var(--kirmizi);background:color-mix(in srgb,var(--kirmizi) 8%,transparent);padding:10px 12px;font-size:.9rem;margin:0 0 14px;border-radius:0 6px 6px 0}
+.temiz{border-left:4px solid var(--yesil);background:color-mix(in srgb,var(--yesil) 8%,transparent);padding:8px 12px;font-size:.85rem;margin:14px 0 0;border-radius:0 6px 6px 0}
+.bekle{display:flex;gap:10px;align-items:center;color:var(--soluk)}
+.bekle i{width:14px;height:14px;border:2px solid var(--cizgi);border-top-color:var(--yazi);border-radius:50%;animation:don 0.9s linear infinite}
+@keyframes don{to{transform:rotate(360deg)}}
+section{padding:46px 0 0}
+h2{font:700 clamp(1.5rem,3.6vw,2rem)/1.15 Georgia,Georgia,serif;margin:0 0 10px}
+.uc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.uc div{background:var(--kagit);border:1px solid var(--cizgi);border-radius:6px;padding:16px}
+.uc b{display:block;font:600 1.05rem Georgia,serif;margin-bottom:4px}
+.uc p{margin:0;font-size:.92rem;color:var(--soluk)}
+footer{padding:44px 0 40px;color:var(--soluk);font-size:.85rem}
+footer a,section a{color:var(--mavi)}
+@media (max-width:720px){.sahne,.uc{grid-template-columns:1fr}textarea,#sonuc{min-height:220px}}

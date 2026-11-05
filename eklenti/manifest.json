@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Ne Diyor? Resmî yazıyı sade Türkçeye çevir",
+  "short_name": "Ne Diyor?",
+  "version": "0.1.0",
+  "description": "Sayfada bir resmî yazı ya da sözleşme maddesi seç, sağ tıkla: kısaca ne diyor, senden ne istiyor, ne zamana kadar.",
+  "permissions": ["contextMenus", "storage"],
+  "host_permissions": ["https://51-20-66-93.sslip.io/*"],
+  "background": {"service_worker": "arkaplan.js"},
+  "action": {"default_title": "Ne Diyor?"},
+  "icons": {"128": "simge.png"}
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ne Diyor?</title>
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<header class="wrap">
+  <h1>Bu yazı <mark>ne diyor?</mark></h1>
+  <div class="sahne">
+    <div class="kagit">
+      <p class="et"><span>Seçtiğin metin</span><span id="sayac">0 / 6000</span></p>
+      <label for="metin" style="position:absolute;left:-9999px">Resmî yazının metni</label>
+      <textarea id="metin" maxlength="6000" placeholder="Bir sayfada metni seçip sağ tıklayarak ya da buraya yapıştırarak başla…"></textarea>
+      <div class="dugmeler"><button class="ana" id="cevir">Sadeleştir</button><span class="kucuk" id="kalan"></span></div>
+    </div>
+    <div class="kagit" aria-live="polite">
+      <p class="et"><span>Sade Türkçesi</span><span id="sure"></span></p>
+      <div id="sonuc"><p class="bos">Sonuç burada görünecek.</p></div>
+    </div>
+  </div>
+</header>
+<footer class="wrap"><p>TC kimlik no, IBAN, telefon ve e-posta gönderilmeden önce gizlenir; metin kaydedilmez. Bu bir hukuk danışmanlığı değildir. <a href="https://github.com/birtohum/ne-diyor">Kaynak kod</a></p></footer>
+<script src="sonuc.js"></script>
+</body>
+</html>

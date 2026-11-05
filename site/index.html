@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ne Diyor?</title>
+<meta name="description" content="Resmî yazıyı yapıştır, sade Türkçesini oku: kısaca ne diyor, ne yapman gerekiyor, hangi süre içinde. Tarih ve tutarlar asıl metne karşı denetlenir.">
+<meta property="og:title" content="Ne Diyor? Resmî yazıyı sade Türkçeye çevir">
+<meta property="og:description" content="Tebligat, ihtarname, sözleşme maddesi: kısaca ne diyor, ne yapman gerekiyor, ne zamana kadar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect x=%224%22 y=%223%22 width=%2224%22 height=%2226%22 rx=%223%22 fill=%22%23fff%22 stroke=%22%231b2a4a%22 stroke-width=%222.5%22/%3E%3Crect x=%228%22 y=%2213%22 width=%2216%22 height=%225%22 fill=%22%23ffe066%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--zemin:#eef0f3;--kagit:#fff;--yazi:#1b2a4a;--soluk:#5d6b85;--cizgi:#d6dbe4;--mavi:#1f4fa3;--fosfor:#ffe066;--kirmizi:#b3261e;--yesil:#1d6b46}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--zemin:#12161f;--kagit:#1a2030;--yazi:#e6eaf2;--soluk:#9aa6bd;--cizgi:#2c3448;--mavi:#8fb3ff;--fosfor:#6b5a10;--kirmizi:#ff8a80;--yesil:#7fd6a6}}
+:root[data-theme="dark"]{--zemin:#12161f;--kagit:#1a2030;--yazi:#e6eaf2;--soluk:#9aa6bd;--cizgi:#2c3448;--mavi:#8fb3ff;--fosfor:#6b5a10;--kirmizi:#ff8a80;--yesil:#7fd6a6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--zemin);color:var(--yazi);font:16px/1.6 Inter,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header{padding:44px 0 6px}
+h1{font:700 clamp(2.4rem,7vw,4rem)/1 "Source Serif 4",Georgia,serif;letter-spacing:-.02em;margin:0}
+h1 mark{background:linear-gradient(transparent 55%,var(--fosfor) 55%);color:inherit;padding:0 .08em}
+.lede{font-size:1.1rem;color:var(--soluk);max-width:58ch;margin:14px 0 0}
+.sahne{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 0}
+.kagit{background:var(--kagit);border:1px solid var(--cizgi);border-radius:6px;box-shadow:0 1px 0 var(--cizgi),0 10px 30px -18px rgba(27,42,74,.35);padding:18px 18px 16px}
+.et{font:600 .7rem/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);margin:0 0 10px;display:flex;justify-content:space-between;gap:8px}
+textarea{width:100%;min-height:340px;resize:vertical;border:0;background:none;color:var(--yazi);font:15px/1.55 "Source Serif 4",Georgia,serif;outline:none}
+.dugmeler{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+button{font:600 .95rem Inter;border-radius:99px;padding:11px 18px;cursor:pointer;border:1.5px solid var(--yazi);background:var(--kagit);color:var(--yazi);min-height:44px}
+button.ana{background:var(--yazi);color:var(--kagit)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--fosfor);outline-offset:2px}
+.kucuk{font-size:.8rem;color:var(--soluk)}
+#sonuc{min-height:340px}
+#sonuc .bos{color:var(--soluk);font:15px/1.6 "Source Serif 4",serif}
+.ozet{font:600 1.35rem/1.35 "Source Serif 4",Georgia,serif;margin:0 0 16px}
+.ozet mark{background:linear-gradient(transparent 50%,var(--fosfor) 50%);color:inherit}
+h3{font:600 .72rem/1 Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);margin:18px 0 8px}
+.yap{list-style:none;padding:0;margin:0}
+.yap li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--cizgi)}
+.yap li::before{content:"";flex:0 0 18px;height:18px;border:2px solid var(--yazi);border-radius:4px;margin-top:3px}
+.yap .zaman{display:inline-block;margin-top:4px;font-size:.85rem;font-weight:600;background:var(--fosfor);padding:1px 6px;border-radius:3px}
+.sade p{font:16px/1.65 "Source Serif 4",Georgia,serif;margin:0 0 10px}
+.terim{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.92rem}
+.terim dt{font-weight:600}
+.terim dd{margin:0;color:var(--soluk)}
+.uyari{border-left:4px solid var(--kirmizi);background:color-mix(in srgb,var(--kirmizi) 8%,transparent);padding:10px 12px;font-size:.9rem;margin:0 0 14px;border-radius:0 6px 6px 0}
+.temiz{border-left:4px solid var(--yesil);background:color-mix(in srgb,var(--yesil) 8%,transparent);padding:8px 12px;font-size:.85rem;margin:14px 0 0;border-radius:0 6px 6px 0}
+.bekle{display:flex;gap:10px;align-items:center;color:var(--soluk)}
+.bekle i{width:14px;height:14px;border:2px solid var(--cizgi);border-top-color:var(--yazi);border-radius:50%;animation:don 0.9s linear infinite}
+@keyframes don{to{transform:rotate(360deg)}}
+section{padding:46px 0 0}
+h2{font:700 clamp(1.5rem,3.6vw,2rem)/1.15 "Source Serif 4",Georgia,serif;margin:0 0 10px}
+.uc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.uc div{background:var(--kagit);border:1px solid var(--cizgi);border-radius:6px;padding:16px}
+.uc b{display:block;font:600 1.05rem "Source Serif 4",serif;margin-bottom:4px}
+.uc p{margin:0;font-size:.92rem;color:var(--soluk)}
+footer{padding:44px 0 40px;color:var(--soluk);font-size:.85rem}
+footer a,section a{color:var(--mavi)}
+@media (max-width:720px){.sahne,.uc{grid-template-columns:1fr}textarea,#sonuc{min-height:220px}}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>Bu yazı <mark>ne diyor?</mark></h1>
+  <p class="lede">Tebligat, ihtarname, kurum yazısı, sözleşme maddesi. Yapıştır; kısaca ne dediğini, senden ne istendiğini ve ne zamana kadar olduğunu sade Türkçeyle oku.</p>
+  <div class="sahne">
+    <div class="kagit">
+      <p class="et"><span>Resmî yazı</span><span id="sayac">0 / 6000</span></p>
+      <label for="metin" class="kucuk" style="position:absolute;left:-9999px">Resmî yazının metni</label>
+      <textarea id="metin" maxlength="6000" placeholder="Yazının metnini buraya yapıştır…"></textarea>
+      <div class="dugmeler">
+        <button class="ana" id="cevir">Sadeleştir</button>
+        <button id="ornek">Örnek yazı</button>
+        <span class="kucuk" id="kalan"></span>
+      </div>
+    </div>
+    <div class="kagit" aria-live="polite">
+      <p class="et"><span>Sade Türkçesi</span><span id="sure"></span></p>
+      <div id="sonuc"><p class="bos">Sol tarafa bir yazı yapıştırıp “Sadeleştir”e bas. Denemek için “Örnek yazı” uydurma bir belediye ihtarnamesi getirir.</p></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Neye dikkat ediyor?</h2>
+    <div class="uc">
+      <div><b>Süreyi ve tutarı uydurmaz</b><p>Modelin yazdığı her sayı (tarih, gün, tutar, madde no) asıl metinde aranır. Metinde olmayan bir sayı çıkarsa sonuçta kırmızıyla uyarılır.</p></div>
+      <div><b>Kişisel numaraları göndermez</b><p>TC kimlik no, IBAN, telefon ve e-posta daha tarayıcından çıkmadan [TC no] gibi işaretlerle değiştirilir. Metin hiçbir yerde kaydedilmez.</p></div>
+      <div><b>Tavsiye vermez</b><p>Yazı ne diyorsa onu söyler; “itiraz et” ya da “öde” demez. Önemli bir kararda yazının aslı ve bir uzman esas alınmalı.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Tarayıcı eklentisi</h2>
+    <p>Bir sayfada metni seç, sağ tıkla, “Ne diyor?”. e-Devlet'te, kurum sitelerinde, mevzuat sayfalarında çalışır. <a href="https://github.com/birtohum/ne-diyor/releases/latest">Chrome ve Edge için indir</a> (geliştirici modunda “Paketlenmemiş öğe yükle”).</p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Metin Meta'nın Muse Spark modeline, gönderilen içeriği eğitimde kullanmayan ücretli katmandan gönderilir. Kötüye kullanıma karşı kişi başı günde 10, toplamda günde 100 metin sınırı var. Bu bir hukuk danışmanlığı değildir.</p>
+  <p>Kod: <a href="https://github.com/birtohum/ne-diyor">github.com/birtohum/ne-diyor</a> · <a href="https://birtohum.github.io/">birtohum</a></p>
+</footer>
+
+<script>
+"use strict";
+const API = "https://51-20-66-93.sslip.io/ne-diyor";
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+
+function maskele(m) {
+  return m.replace(/\bTR\s?\d{2}(?:\s?\d{4}){5}\s?\d{2}\b/gi, "[IBAN]")
+    .replace(/(?<!\d)[1-9]\d{10}(?!\d)/g, "[TC no]")
+    .replace(/(?<!\d)(?:\+?90[\s-]?)?0?\(?5\d{2}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}(?!\d)/g, "[telefon]")
+    .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, "[e-posta]");
+}
+function sayac() { $("#sayac").textContent = `${$("#metin").value.length.toLocaleString("tr-TR")} / 6.000`; }
+$("#metin").addEventListener("input", sayac);
+$("#ornek").onclick = async () => { $("#metin").value = await (await fetch("ornek.txt")).text(); sayac(); $("#metin").focus(); };
+
+function ciz(r) {
+  let h = "";
+  if (r.supheli_sayilar && r.supheli_sayilar.length)
+    h += `<p class="uyari"><b>Dikkat:</b> Sade metinde asıl yazıda geçmeyen sayı(lar) var: ${r.supheli_sayilar.map(esc).join(", ")}. Bu tarih, süre ya da tutarı asıl yazıdan kontrol et.</p>`;
+  h += `<p class="ozet"><mark>${esc(r.ozet)}</mark></p>`;
+  if (r.yapilacaklar && r.yapilacaklar.length)
+    h += `<h3>Senden istenen</h3><ul class="yap">${r.yapilacaklar.map((y) => `<li><div>${esc(y.ne || "")}${y.ne_zaman ? `<br><span class="zaman">${esc(y.ne_zaman)}</span>` : ""}</div></li>`).join("")}</ul>`;
+  if (r.sade) h += `<h3>Sade hâli</h3><div class="sade">${r.sade.split(/\n{2,}/).map((p) => `<p>${esc(p)}</p>`).join("")}</div>`;
+  if (r.terimler && r.terimler.length) h += `<h3>Zor kelimeler</h3><dl class="terim">${r.terimler.map((t) => `<dt>${esc(t.terim)}</dt><dd>${esc(t.anlam)}</dd>`).join("")}</dl>`;
+  if (r.supheli_sayilar && !r.supheli_sayilar.length) h += `<p class="temiz">Sade metindeki bütün sayılar asıl yazıda da geçiyor.</p>`;
+  if (r.maskelendi) h += `<p class="kucuk" style="margin-top:10px">Kişisel numaralar gönderilmeden önce gizlendi.</p>`;
+  if (r.kirpildi) h += `<p class="kucuk">Yazı uzun olduğu için ilk 6.000 karakteri işlendi.</p>`;
+  $("#sonuc").innerHTML = h;
+}
+
+$("#cevir").onclick = async () => {
+  const ham = $("#metin").value.trim(), metin = maskele(ham);
+  if (metin.length < 40) { $("#sonuc").innerHTML = `<p class="bos">Biraz daha uzun bir metin yapıştır (en az bir cümle).</p>`; return; }
+  $("#cevir").disabled = true; $("#sure").textContent = "";
+  $("#sonuc").innerHTML = `<div class="bekle"><i></i> Okunuyor… genellikle 15–25 saniye sürüyor.</div>`;
+  const t = performance.now();
+  try {
+    const c = await fetch(API + "/api/sadelestir", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({metin})});
+    const r = await c.json();
+    if (!c.ok) throw new Error(r.hata || "Bir sorun oldu.");
+    r.maskelendi = r.maskelendi || metin !== ham; ciz(r); $("#sure").textContent = `${((performance.now() - t) / 1000).toFixed(0)} sn`;
+  } catch (e) {
+    $("#sonuc").innerHTML = `<p class="uyari">${esc(e.message === "Failed to fetch" ? "Sunucuya ulaşılamadı. Biraz sonra yeniden dene." : e.message)}</p>`;
+  } finally { $("#cevir").disabled = false; durum(); }
+};
+
+async function durum() {
+  try { const d = await (await fetch(API + "/durum")).json();
+    $("#kalan").textContent = d.butce_dolu ? "Servisin bütçesi doldu." : `Bugün ${d.kalan} hakkın kaldı.`; } catch (e) { $("#kalan").textContent = ""; }
+}
+sayac(); durum();
+</script>
+</body>
+</html>

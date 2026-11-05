@@ -1,0 +1,23 @@
+[Unit]
+Description=Ne Diyor? resmî yazı sadeleştirme API'si
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/ne-diyor
+# Meta anahtarı Yorum demosuyla aynı ortam dosyasından okunur
+EnvironmentFile=/etc/yorum-demo.env
+Environment=NEDIYOR_KAYIT=/opt/ne-diyor/kayitlar
+ExecStart=/usr/bin/python3 sunucu.py
+Restart=always
+RestartSec=5
+MemoryMax=200M
+CPUQuota=50%
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/ne-diyor/kayitlar
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
